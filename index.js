@@ -82,7 +82,7 @@ app.post("/users/login", async (req, res) => {
             ]
           );
           console.log("response is ready!");
-          res.status(200).json({
+          res.json({
             message: "Login successful",
             status: "Success",
             loginCount: req.session.loginCount,
