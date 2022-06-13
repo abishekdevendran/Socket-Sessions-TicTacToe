@@ -24,7 +24,15 @@ const wrap = (middleware) => (socket, next) =>
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://socket-sessions-tictactoe.herokuapp.com:*",
+    ],
+    credentials: true,
+  })
+);
 app.use(sessionMiddleware);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
