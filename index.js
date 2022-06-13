@@ -22,6 +22,7 @@ const wrap = (middleware) => (socket, next) =>
   middleware(socket.request, {}, next);
 
 // app.enable("trust proxy");
+app.set("trust proxy", true);
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
