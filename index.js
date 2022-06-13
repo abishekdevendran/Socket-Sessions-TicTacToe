@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const { sessionMiddleware } = require("./helpers/redisStore");
 const db = require("./helpers/db");
 const bcrypt = require("bcrypt");
+const path=require("path");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
