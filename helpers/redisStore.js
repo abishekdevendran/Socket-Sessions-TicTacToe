@@ -15,9 +15,9 @@ const sessionMiddleware = session({
   proxy: true,
   name: "tictactoe-session",
   cookie: {
-    secure: true,
+    // secure: true,
+    // sameSite: "none",
     maxAge: 1000 * 60 * 30, //30 mins
-    sameSite: "none",
   },
 });
 
