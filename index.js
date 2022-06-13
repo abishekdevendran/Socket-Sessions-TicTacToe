@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const { sessionMiddleware } = require("./helpers/redisStore");
 const db = require("./helpers/db");
 const bcrypt = require("bcrypt");
-const path=require("path");
+const path = require("path");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +21,7 @@ const io = new Server(server, {
 const wrap = (middleware) => (socket, next) =>
   middleware(socket.request, {}, next);
 
+app.enable("trust proxy");
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
