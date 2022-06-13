@@ -15,8 +15,8 @@ const sessionMiddleware = session({
   proxy: true,
   name: "tictactoe-session",
   cookie: {
-    // secure: true,
-    // sameSite: "none",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // must be 'none' to enable cross-site delivery
+    secure: process.env.NODE_ENV === "production",
     maxAge: 1000 * 60 * 30, //30 mins
   },
 });
