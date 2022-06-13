@@ -71,6 +71,7 @@ app.post("/users/login", async (req, res) => {
         if (isMatch) {
           req.session.user = uname;
           req.session.loginCount = parseInt(user.rows[0].logincount + 1);
+          console.log(req.session.loginCount,req.session.user,"loginCount and user");
           await db.query(
             "UPDATE users SET loginCount = $1 WHERE username = $2",
             [
