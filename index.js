@@ -80,6 +80,7 @@ app.post("/users/login", async (req, res) => {
               uname,
             ]
           );
+          console.log("response is ready!");
           res.status(200).json({
             message: "Login successful",
             status: "Success",
