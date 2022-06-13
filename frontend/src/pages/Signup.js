@@ -21,6 +21,7 @@ const submitHandler = async (event) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "withCredentials": true,
       },
       body: JSON.stringify(data),
     });
