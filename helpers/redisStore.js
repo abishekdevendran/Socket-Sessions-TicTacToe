@@ -3,8 +3,14 @@ const SECRET = process.env.SECRET || "secret";
 const session = require("express-session");
 
 const { createClient } = require("redis");
-const redisClient = createClient({ legacyMode: true,url:process.env.REDIS_URL });
-redisClient.connect().then(console.log("redis connected successfully")).catch(console.error("redis connection failed"));
+const redisClient = createClient({
+  legacyMode: true,
+  url: process.env.REDIS_URL,
+});
+redisClient
+  .connect()
+  .then(console.log("redis connected successfully"))
+  .catch(console.log("redis connection failed"));
 const RedisStore = require("connect-redis")(session);
 const sessionMiddleware = session({
   store: new RedisStore({ client: redisClient }),

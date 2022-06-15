@@ -40,9 +40,6 @@ io.use(wrap(sessionMiddleware));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
-  });
 }
 
 app.get("/session", (req, res) => {
@@ -72,7 +69,11 @@ app.post("/users/login", async (req, res) => {
         if (isMatch) {
           req.session.user = uname;
           req.session.loginCount = parseInt(user.rows[0].logincount + 1);
-          console.log(req.session.loginCount,req.session.user,"loginCount and user");
+          console.log(
+            req.session.loginCount,
+            req.session.user,
+            "loginCount and user"
+          );
           await db.query(
             "UPDATE users SET loginCount = $1 WHERE username = $2",
             [
@@ -268,8 +269,9 @@ io.on("connection", (socket) => {
     }
   });
 });
+
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontend/public/index.html"));
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
 server.listen(PORT, () => {
   console.log("listening on port", PORT);
