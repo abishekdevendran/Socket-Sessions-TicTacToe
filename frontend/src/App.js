@@ -12,19 +12,29 @@ import Game from "./pages/Game";
 
 function App() {
   useEffect(() => {
-    const pageSetter= ()=> {
-        let viewheight = window.innerHeight;
-        let viewwidth = window.innerWidth;
-        let viewport = document.querySelector("meta[name=viewport]");
-        viewport.setAttribute("content", "height=" + viewheight + ", width=" + viewwidth + ", initial-scale=1.0");
-    }
+    const pageSetter = () => {
+      let viewheight = window.innerHeight;
+      let viewwidth = window.innerWidth;
+      let viewport = document.querySelector("meta[name=viewport]");
+      viewport.setAttribute(
+        "content",
+        "height=" + viewheight + ", width=" + viewwidth + ", initial-scale=1.0"
+      );
+    };
     pageSetter();
-  },[]);
+  }, []);
   return (
     <DarkModeContextProvider>
       <UserContextProvider>
         <SocketContextProvider>
           <Navbar />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              className:
+                "text-primary bg-bg-secondary ease-in-ease-out duration-1000",
+            }}
+          />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="login" element={<Login />} />
@@ -32,7 +42,6 @@ function App() {
             <Route path="game/:gameIdUrl" element={<Game />} />
             <Route path="game" element={<Game />} />
           </Routes>
-          <Toaster position="top-center" toastOptions={{className:"text-primary bg-bg-secondary ease-in-ease-out duration-1000"}}/>
         </SocketContextProvider>
       </UserContextProvider>
     </DarkModeContextProvider>
